@@ -1,0 +1,82 @@
+.btn-pdark{
+    background: #1D6617;
+    color: #ffffff;
+    padding: 16px;
+    border: none; /* 避免邊框影響 */
+    outline: none; /* 避免點擊時輪廓 */
+}
+.btn-pdark:hover {
+    background-color: #598E71;
+    color: #ffffff;
+}
+
+.btn-pdark:active {
+    background-color: #598E71 !important;
+    color: #ffffff !important;
+}
+
+
+.btn-outline-pdark{
+    border: 1px solid #1D6617 ;
+    background: #ffffff;
+    color: #1D6617;
+    padding: 16px;
+}
+.btn-outline-pdark:hover,.btn-outline-pdark:active{
+    background: rgba(89, 142, 113, 0.25);
+    color: #1D6617;
+    padding: 16px;
+}
+
+.btn-white{
+    background: #ffffff;
+    color: #1E1E1E;
+    border: none;
+    padding: 12px 24px;
+}
+.btn-white:hover{
+    background: #598E71;
+    color: #ffffff;
+    border: none;
+}
+.btn-white:active{
+    background: #598E71 !important;
+    color: #ffffff !important;
+}
+
+@media (max-width: 768px) {
+    .btn-pdark{
+        padding: 12px;
+    }
+    .btn-pdark:hover,.btn-pdark:active{
+    background: #598E71;
+    color: #ffffff;
+    padding: 12px;
+}
+
+    .btn-outline-pdark{
+        padding: 12px;
+    }
+    .btn-white{
+        padding: 8px 16px;
+    }
+}
+
+.btn {
+    padding: 16px;
+    font-size: 16px;
+    line-height: 1.5;
+    font-weight: 400;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+}
+
+.btn-dark {
+    background-color: var(--Primary-dark);
+    color: var(--Neutral-0);
+}
+
+.btn-light {
+    border: 1px solid var(--Primary-dark);
+}

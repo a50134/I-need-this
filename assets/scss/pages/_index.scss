@@ -1,0 +1,390 @@
+// index.scss
+
+// 確保在檔案頂部引入 _mixins.scss
+@import "mixins";
+
+
+/* Hero Section (輪播) */
+
+.hero.container-fluid {
+  padding: 0;
+  margin: 0;
+}
+
+.hero {
+  .carousel-item img {
+    @include img-cover;
+    height: 740px;
+    display: block;
+  }
+
+  .carousel-caption {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    text-align: left;
+    padding: 0 16px;
+
+    .bg-opacity-blur {
+      background-color: rgba(87, 87, 87, 0.4);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(8px);
+      width: 636px;
+      height: 304px;
+
+      // 自訂斷點: 小於636px
+      @media (max-width: 635px) {
+        width: auto;
+        height: auto;
+        margin: 0 auto 60px;
+      }
+    }
+
+    // 手機版 Caption
+    @include breakpoint(md) {
+      justify-content: flex-end;
+      align-items: flex-end;
+      padding: 0 12px 60px;
+      text-align: center;
+
+      .bg-opacity-blur {
+        width: 100%;
+        height: auto;
+        margin: 0 auto;
+      }
+    }
+  }
+
+  .carousel-indicators {
+    // 桌機版指示器
+    @media (min-width: 768px) {
+      [data-bs-target] {
+        width: 72px;
+        height: 8px;
+        margin-right: 32px;
+        border-radius: 8px;
+        background-color: #e8e8e8;
+      }
+      .active {
+        background-color: #598e71;
+      }
+    }
+
+    // 手機版指示器
+    @include breakpoint(md) {
+      [data-bs-target] {
+        width: 10px;
+        height: 10px;
+        margin-right: 12px;
+        border-radius: 50%;
+        background-color: #e8e8e8;
+      }
+      .active {
+        background-color: #598e71;
+      }
+    }
+  }
+
+  // 手機隱藏左右箭頭
+  .carousel-control-prev,
+  .carousel-control-next {
+    @include breakpoint(md) {
+      display: none;
+    }
+  }
+}
+
+/* =============================================
+   通用樣式
+   ============================================= */
+
+.section-margin {
+  margin-top: 120px;
+  margin-bottom: 120px;
+
+  @include breakpoint(md) {
+    margin-top: 32px;
+    margin-bottom: 32px;
+  }
+}
+
+.bg-liner-green {
+  background: linear-gradient(#ffffff, #e3efe8, #ffffff);
+}
+
+/* =============================================
+   固定元件 & 裝飾
+   ============================================= */
+
+.fixed-right {
+  position: fixed;
+  top: 50%;
+  right: 40px;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 3;
+
+  a.social {
+    width: 40px;
+    height: 40px;
+    background: white;
+    border-radius: 999px;
+    @include flex-center; // 使用 Mixin
+    box-shadow: 0px 0px 10px 0px rgba(30, 30, 30, 0.3);
+    text-decoration: none;
+    &:hover {
+      background: #e3efe8;
+    }
+    img {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}
+
+.white-bar {
+  width: 3px;
+  height: 124px;
+  background: #ffffff;
+  box-shadow: 0px 0px 10px 0px rgba(30, 30, 30, 0.3);
+  display: flex;
+}
+
+// 葉子裝飾
+.leaf1 {
+  position: absolute;
+  top: -95px;
+  right: 24px;
+}
+.leaf2 {
+  position: absolute;
+  left: 24px;
+  bottom: 0;
+  pointer-events: none;
+}
+.leaf3 {
+  position: absolute;
+  top: -60px;
+  right: 0px;
+  width: 100%;
+  max-width: 252px;
+  height: auto;
+  z-index: 3;
+  pointer-events: none;
+
+  @include breakpoint(tablet) {
+    top: 10px;
+    width: 33%;
+  }
+
+  @include breakpoint(sm) {
+    top: -20px;
+    width: 85px;
+    height: 116px;
+  }
+}
+
+/* =============================================
+   卡片 & 圖片效果
+   ============================================= */
+a.sale .card {
+  overflow: hidden;      /* 裁掉放大的圖片 */
+  border: 0;
+  position: relative;    /* 建立定位基準 */
+}
+a.sale .card-img-top {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease;
+  transform-origin: center center;
+  position: relative;
+  z-index: 1;            /* 圖片在下層 */
+}
+
+/* 文字區塊 */
+a.sale .card-body {
+  position: relative;
+  z-index: 2;            /* 文字在上層 */
+  transition: background 0.22s ease;
+}
+
+/* hover 效果 */
+@media (min-width: 768px) {
+  a.sale:hover .card-img-top {
+    transform: scale(1.2); /* 放大圖片 */
+  }
+
+  a.sale:hover .card-body {
+    background: #E3EFE8;   /* hover 時加底色 */
+  }
+}
+
+.row.py-lg-10 {
+  overflow: visible;
+}
+
+.img-box {
+  position: relative;
+  overflow: hidden;
+
+  .img-inner img {
+    @include img-cover;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s ease;
+  }
+
+  &:hover img {
+    transform: scale(1.2);
+  }
+
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(30, 30, 30, 0.5);
+    color: #fff;
+    text-align: center;
+    z-index: 2;
+  }
+
+  .inner-border {
+    position: absolute;
+    top: 32px;
+    left: 32px;
+    right: 32px;
+    bottom: 32px;
+    border: 1px solid #fff;
+    z-index: 3;
+    pointer-events: none;
+
+    @include breakpoint(md) {
+      top: 24px;
+      left: 24px;
+      right: 24px;
+      bottom: 24px;
+    }
+  }
+
+  .title-box {
+    display: inline-block;
+    z-index: 3;
+  }
+}
+
+.social-img-box {
+  position: relative;
+  overflow: hidden;
+
+  .crop-img {
+    @include img-cover;
+    height: 480px;
+  }
+
+  .social-overlay {
+    position: absolute;
+    top: 0;
+    left: 10px;
+    right: 10px;
+    bottom: 12px;
+    pointer-events: none;
+    background: linear-gradient(
+      to bottom,
+      rgba(30, 30, 30, 0) 0%,
+      rgba(30, 30, 30, 0.2) 20%,
+      rgba(30, 30, 30, 0.6) 60%
+    );
+    z-index: 1;
+  }
+  .social-text {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+    padding: 40px;
+    z-index: 2;
+    box-sizing: border-box;
+
+    @include breakpoint(md) {
+      padding: 16px;
+    }
+  }
+}
+
+/* =============================================
+   企業責任 (可展開區塊)
+   ============================================= */
+.expandable-col {
+  cursor: pointer;
+  transition: all 0.5s ease;
+
+  .collapsed-title,
+  .expanded-content {
+    transition: opacity 0.3s ease;
+  }
+
+  .collapsed-title {
+    @include flex-center; // 使用 Mixin
+    text-align: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  .expanded-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-left: 32px;
+    padding-bottom: 32px;
+  }
+
+  &:not(.active) .expanded-content {
+    display: none;
+  }
+
+  &.active .collapsed-title {
+    display: none;
+  }
+
+  // 手機版強制展開
+  @include breakpoint(md) {
+    flex: 0 0 100%;
+    max-width: 100%;
+
+    .expanded-content {
+      display: flex !important;
+    }
+
+    .collapsed-title {
+      display: none !important;
+    }
+  }
+}
+
+/* =============================================
+   字體 (範例)
+   ============================================= */
+/* .text-tl {
+  font-size: 20px;
+  line-height: 1.5;
+}
+.text-tm {
+  font-style: 16px;
+  line-height: 1.5;
+}
+.text-tr {
+  font-size: 14px;
+  line-height: 1.5;
+}
+*/
